@@ -51,8 +51,8 @@
         var getDate = datePicker.getDateData(inityear, initmonth);
         var html = insertTimepicker.insert(getDate);
         insertTimepicker.changeBox(html);
-        insertTimepicker.show();
-        insertTimepicker.show();
+        insertTimepicker.show(window.datepickerNowInput);
+        insertTimepicker.show(window.datepickerNowInput);
         var year2, month2;
         if (initmonth > 12) {
             let year1 = parseInt(initmonth / 12);
@@ -79,7 +79,7 @@
                 if (month1 > 12) {
                     let year1 = parseInt(month1 / 12);
                     let month3 = parseInt(month1 % 12);
-                    year2 = getDate[i].year + year1;
+                    year2 = parseInt(getDate[i].year + year1);
                     month2 = insertTimepicker.formmat(month3);
                 }
                 else {
@@ -87,16 +87,16 @@
                     month2 = insertTimepicker.formmat(month1);
                 }
                 let date = insertTimepicker.formmat(getDate[i].date);
-                var input = document.querySelector('.datepicker-input');
-                input.value = year2 + '-' + month2 + '-' + date;
-                insertTimepicker.show();
+                window.datepickerNowInput.value = year2 + '-' + month2 + '-' + date;
+                insertTimepicker.show(window.datepickerNowInput);
             }, false)
         }
     }
     insertTimepicker.inputevent = function (event) {
         event.stopPropagation();
         var inityear, initmonth;
-        var input = document.querySelector('.datepicker-input');
+        var input = event.target;
+        window.datepickerNowInput = event.target;
         var inputText = input.value;
         var inputArr = inputText.split('-');
         if (inputText == '') {
@@ -112,7 +112,7 @@
         var html = insertTimepicker.insert(getDate);
         insertTimepicker.mounted();
         insertTimepicker.changeBox(html);
-        insertTimepicker.show();
+        insertTimepicker.show(input);
         var year2, month2;
         if (initmonth > 12) {
             let year1 = parseInt(initmonth / 12);
@@ -135,7 +135,7 @@
                 if (month1 > 12) {
                     let year1 = parseInt(month1 / 12);
                     let month3 = parseInt(month1 % 12);
-                    year2 = getDate[i].year + year1;
+                    year2 = parseInt(getDate[i].year) + year1;
                     month2 = insertTimepicker.formmat(month3);
                 }
                 else {
@@ -143,20 +143,20 @@
                     month2 = insertTimepicker.formmat(month1);
                 }
                 let date = insertTimepicker.formmat(getDate[i].date);
-                var input = document.querySelector('.datepicker-input');
                 input.value = year2 + '-' + month2 + '-' + date;
-                insertTimepicker.show();
+                insertTimepicker.show(input);
             }, false)
         }
     }
     insertTimepicker.mounted = function () {
-        var input = document.querySelector('.datepicker-input');
-        input.removeEventListener('click', insertTimepicker.inputevent);
-        input.addEventListener('click', insertTimepicker.inputevent);
+        var input = document.getElementsByClassName('datepicker-input');
+        for (let i = 0; i < input.length; i++) {
+            input[i].removeEventListener('click', insertTimepicker.inputevent);
+            input[i].addEventListener('click', insertTimepicker.inputevent);
+        }
     }
-    insertTimepicker.show = function () {
+    insertTimepicker.show = function (input) {
         var contain = document.querySelector('.datepicker-contain');
-        var input = document.querySelector('.datepicker-input');
         var top = input.offsetTop;
         var left = input.offsetLeft;
         var height = input.offsetHeight;

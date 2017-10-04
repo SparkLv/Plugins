@@ -6,6 +6,7 @@
     position:absolute;
     display:none;
     width:420px;
+    background-color:white;
 }
 .datepicker-contain-show{
     display: block;
