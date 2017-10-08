@@ -17,17 +17,18 @@
     padding:0 20px;
     background-color:#f0f0f0;
     text-align: center;
-    font-size:16px;
+    font-size:18px;
     line-height:50px;
 }
 .datepicker-header .datepicker-btn{
     text-decoration: none;
-    color:#1abc9c;
+    color:#369;
     font-family: serif;
     height:50px;
     line-height:50px;
     width:20px;
-    font-size:20px;
+    font-size:30px;
+    font-weight: bold;
     cursor: pointer;
 }
 .datepicker-header .datepicker-left-btn{
@@ -47,11 +48,12 @@
     line-height:20px;
 }
 .datepicker-body .datepicker-table td{
-    border:1px solid #1abc9c;
+    border:1px solid #369;
     cursor: pointer;
+    font-family: 'Microsoft-YaHei'
 }
 .datepicker-body .datepicker-table td:hover{
-    background-color: #1abc9c;
+    background-color: #9CB1C5;
 }
 .datepicker-input {
     height:20px;
